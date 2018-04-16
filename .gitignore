@@ -1,0 +1,11 @@
+
+client/booking/.idea/
+
+client/booking/app/src/androidTest/
+client/booking/app/src/test/java/com/holy/booking/ExampleUnitTest.java
+
+client/booking/common/src/androidTest/java/com/holy/common/ExampleInstrumentedTest.java
+
+client/booking/common/src/test/java/com/holy/common/ExampleUnitTest.java
+
+client/booking/gradle/wrapper/
