@@ -31,6 +31,7 @@ sudo ldconfig -v
 gcc cgi.c -o app -lfcgi
 ```
 
+### 5.启动spawn-fcgi
 ```
 //查看端口号对应进程
 netstat -apn | grep 8888
