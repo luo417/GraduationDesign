@@ -39,3 +39,13 @@ netstat -apn | grep 8888
 //-n 前台显示
 spawn-fcgi -a 127.0.0.1 -p 8888 -f ./app -n
 ```
+
+### 6.git相关命令
+```
+//回退代码
+git log
+git reset --hard 55ee69a682b094b7e3ab32dc2e3746282d986109
+git push -f
+
+git revert e7c8599d29b61579ef31789309b4e691d6d3a83f
+```
