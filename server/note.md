@@ -1,4 +1,4 @@
-### 1.重新加载Nginx配置文件
+f ### 1.重新加载Nginx配置文件
  ``` 
  sudo ./nginx -s reload
 ```
@@ -19,5 +19,22 @@ location /login {
 gcc echo.c -lfcgi
 
 //启动spawn_fcgi
-spawn-fcgi -a 地址 -p port -f fastcgi程序
+spawn-fcgi -a 地址 -p port -f ./fastcgi程序
+```
+
+### 4.编译cgi程序
+```
+//将libfcgi库所在路径加入到/etc/ld.so.conf
+/usr/local/lib
+sudo ldconfig -v
+
+gcc cgi.c -o app -lfcgi
+```
+
+```
+//查看端口号对应进程
+netstat -apn | grep 8888
+
+//-n 前台显示
+spawn-fcgi -a 127.0.0.1 -p 8888 -f ./app -n
 ```
