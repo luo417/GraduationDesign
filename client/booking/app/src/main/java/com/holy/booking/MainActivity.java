@@ -1,6 +1,8 @@
 package com.holy.booking;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -15,10 +17,11 @@ import com.holy.common.widget.PortraitView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+        implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     @BindView(R.id.appbar)
-    View mLayAppBar; 
+    View mLayAppBar;
 
     @BindView(R.id.im_portrait)
     PortraitView mPortrait;
@@ -41,6 +44,8 @@ public class MainActivity extends Activity {
     protected void initWidget() {
         super.initWidget();
 
+        mNavigation.setOnNavigationItemSelectedListener(this );
+
         Glide.with(this)
                 .load(R.drawable.bg_src_morning)
                 .centerCrop()
@@ -55,5 +60,11 @@ public class MainActivity extends Activity {
     @OnClick(R.id.im_search)
     void onSearchMenuClick() {
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mTitle.setText(item.getTitle());
+        return true;
     }
 }

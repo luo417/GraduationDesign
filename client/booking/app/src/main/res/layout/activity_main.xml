@@ -74,6 +74,9 @@
         android:outlineProvider="bounds"
         android:translationZ="@dimen/len_8"
         tools:targetApi="lollipop"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        app:menu="@menu/navigation_items"
+        app:itemIconTint="@color/text_nav"
+        app:itemTextColor="@color/text_nav"/>
 
 </android.support.design.widget.CoordinatorLayout>
