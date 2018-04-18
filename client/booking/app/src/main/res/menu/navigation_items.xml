@@ -8,12 +8,12 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_group"
-        android:icon="@drawable/ic_group"
-        android:title="@string/action_group"
+        android:icon="@drawable/ic_res"
+        android:title="@string/action_res"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_contact"
-        android:icon="@drawable/ic_contact"
-        android:title="@string/action_contact"
+        android:icon="@drawable/ic_mine"
+        android:title="@string/action_mine"
         app:showAsAction="ifRoom" />
 </menu>
