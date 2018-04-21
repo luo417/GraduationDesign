@@ -92,8 +92,7 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mTitle.setText(item.getTitle());
-        return true;
+        return mNavHelper.performClickMenu(item.getItemId());
     }
 
     @Override
