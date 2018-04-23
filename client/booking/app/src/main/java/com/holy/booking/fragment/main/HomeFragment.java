@@ -5,14 +5,14 @@ import android.view.View;
 
 import com.holy.booking.R;
 import com.holy.common.app.Fragment;
-import com.holy.common.widget.GalleyView;
+import com.holy.common.widget.GalleryView;
 
 import butterknife.BindView;
 
 
 public class HomeFragment extends Fragment {
     @BindView(R.id.galleyView)
-    GalleyView mGalleyView;
+    GalleryView mGalleryView;
 
 
     @Override
@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
     protected void initWidget(View root) {
         super.initWidget(root);
 
-        mGalleyView.setup(getLoaderManager(), new GalleyView.SelectedChangeListener() {
+        mGalleryView.setup(getLoaderManager(), new GalleryView.SelectedChangeListener() {
             @Override
             public void onSelectedCountChanged(int count) {
 

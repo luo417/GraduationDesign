@@ -90,6 +90,11 @@ public class MainActivity extends Activity
 
     }
 
+    @OnClick(R.id.im_portrait)
+    void onPortraitClick() {
+        AccountActivity.show(this);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return mNavHelper.performClickMenu(item.getItemId());
