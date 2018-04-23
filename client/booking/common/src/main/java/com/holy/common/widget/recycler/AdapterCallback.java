@@ -7,5 +7,5 @@ package com.holy.common.widget.recycler;
  */
 
 public interface AdapterCallback<Data> {
-    void updata(Data data, RecyclerAdapter.ViewHolder<Data> holder);
+    void update(Data data, RecyclerAdapter.ViewHolder<Data> holder);
 }

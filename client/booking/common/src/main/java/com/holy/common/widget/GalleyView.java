@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -54,9 +55,9 @@ public class GalleyView extends RecyclerView {
         //每行4列
         setLayoutManager(new GridLayoutManager(getContext(), 4));
         setAdapter(mAdapter);
-        mAdapter.setListener(new RecyclerAdapter.AdapterListenerImpl<Image>() {
+        mAdapter.setListener(new RecyclerAdapter.AdapterListenerImpl<Image>(){
             @Override
-            public void onItemClick(RecyclerAdapter.ViewHolder<Image> holder, Image image) {
+            public void onItemClick(RecyclerAdapter.ViewHolder holder, Image image) {
                 if (onItemSelectClick(image)) {
                     holder.updateData(image);
                 }
@@ -65,8 +66,10 @@ public class GalleyView extends RecyclerView {
     }
 
     public int setup(LoaderManager loaderManager, SelectedChangeListener listener) {
+//        System.out.println("---->>> setup start");
         mListener = listener;
         loaderManager.initLoader(LOADER_ID, null, mLoaderCallback);
+//        System.out.println("---->>> setup end");
         return LOADER_ID;
     }
 
@@ -84,6 +87,10 @@ public class GalleyView extends RecyclerView {
         } else {
             if (mSelectedImages.size() >= MAX_SELECTED_IMAGE_COUNT) {
                 //Toast一个提示消息
+                String msg = getResources().getString(R.string.label_gallery_select_max_size);
+                msg = String.format(msg, MAX_SELECTED_IMAGE_COUNT);
+                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+
                 notifyRefresh = false;
             } else {
                 mSelectedImages.add(image);
@@ -261,9 +268,9 @@ public class GalleyView extends RecyclerView {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mPic = findViewById(R.id.im_image);
-            mShade = findViewById(R.id.view_shade);
-            mSelected = findViewById(R.id.cb_select);
+            mPic = itemView.findViewById(R.id.im_image);
+            mShade = itemView.findViewById(R.id.view_shade);
+            mSelected = itemView.findViewById(R.id.cb_select);
         }
 
         @Override
@@ -276,6 +283,7 @@ public class GalleyView extends RecyclerView {
                     .into(mPic);
 
             mShade.setVisibility(image.isSelect ? VISIBLE : INVISIBLE);
+            mSelected.setVisibility(VISIBLE);
             mSelected.setChecked(image.isSelect);
         }
     }
