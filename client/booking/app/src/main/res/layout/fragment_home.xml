@@ -4,10 +4,5 @@
     android:layout_height="match_parent"
     tools:context="com.holy.booking.fragment.main.HomeFragment">
 
-    <com.holy.common.widget.GalleryView
-        android:id="@+id/galleyView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="1dp"/>
 
 </FrameLayout>
