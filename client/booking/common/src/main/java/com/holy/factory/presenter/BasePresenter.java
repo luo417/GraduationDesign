@@ -12,8 +12,10 @@ public class BasePresenter<T extends BaseContract.View>  implements BaseContract
         setView(view);
     }
 
+    @SuppressWarnings("unchecked")
     protected void setView(T view) {
         this.mView = view;
+        this.mView.setPresenter(this);
     }
 
     protected T getView() {
@@ -28,6 +30,7 @@ public class BasePresenter<T extends BaseContract.View>  implements BaseContract
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void destory() {
         T view = mView;
