@@ -1,4 +1,4 @@
-package com.holy.factory.model.api;
+package com.holy.factory.model.api.account;
 
 /**
  * @author Hailin
