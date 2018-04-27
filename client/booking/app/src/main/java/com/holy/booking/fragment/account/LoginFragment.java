@@ -22,4 +22,11 @@ public class LoginFragment extends Fragment {
         super.onAttach(context);
         mAccountTrigger = (AccountTrigger) context;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //切换到注册界面
+        mAccountTrigger.triggerView();
+    }
 }
