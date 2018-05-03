@@ -14,7 +14,7 @@ public interface BaseContract {
 
         void showError(@StringRes int str);
 
-        void showLoding();
+        void showLoading();
 
         void setPresenter(T presenter);
     }

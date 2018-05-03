@@ -7,6 +7,10 @@ import com.google.gson.GsonBuilder;
 import com.holy.common.app.Application;
 import com.holy.factory.data.DataSource;
 import com.holy.factory.model.api.RspModel;
+import com.holy.factory.persistence.Account;
+import com.holy.factory.utils.DBFlowExclusionStrategy;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -30,8 +34,22 @@ public class Factory {
         executor = Executors.newFixedThreadPool(4);
         gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                //TODO 设置过滤器
+                //设置过滤器
+                .setExclusionStrategies(new DBFlowExclusionStrategy())
                 .create();
+    }
+
+    /**
+     * Factory 中的初始化
+     */
+    public static void setup() {
+        // 初始化数据库
+        FlowManager.init(new FlowConfig.Builder(app())
+                .openDatabasesOnInit(true) // 数据库初始化的时候就开始打开
+                .build());
+
+        // 持久化的数据进行初始化
+        Account.load(app());
     }
 
     /**
@@ -136,4 +154,11 @@ public class Factory {
 
     }
 
+    /**
+     * 处理推送来的消息
+     * @param message
+     */
+    public static void dispatchPush(String message) {
+        //TODO
+    }
 }

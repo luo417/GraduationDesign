@@ -26,7 +26,7 @@ public abstract class PresenterFragment<Presenter extends BaseContract.Presenter
     }
 
     @Override
-    public void showLoding() {
+    public void showLoading() {
         // TODO
     }
 

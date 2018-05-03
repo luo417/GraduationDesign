@@ -26,7 +26,7 @@ public class BasePresenter<T extends BaseContract.View>  implements BaseContract
     public void start() {
         T view = mView;
         if (view != null) {
-            view.showLoding();
+            view.showLoading();
         }
     }
 

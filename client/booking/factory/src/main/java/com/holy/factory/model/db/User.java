@@ -1,5 +1,10 @@
 package com.holy.factory.model.db;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
 /**
@@ -7,11 +12,20 @@ import java.util.Date;
  * @time 2018/4/27 16:13
  * @function
  */
-public class User {
+@Table(database = AppDatabase.class)
+public class User extends BaseModel{
+    public static final int SEX_MAN = 1;
+    public static final int SEX_WOMAN = 2;
+
+    @PrimaryKey
     private String id;
+    @Column
     private String name;
+    @Column
     private String phone;
+    @Column
     private String portrait;
+    @Column
     private int sex = 0;
 
     public String getId() {

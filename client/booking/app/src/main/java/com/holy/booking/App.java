@@ -1,6 +1,8 @@
 package com.holy.booking;
 
 import com.holy.common.app.Application;
+import com.holy.factory.Factory;
+import com.igexin.sdk.PushManager;
 
 /**
  * @author Hailin
@@ -9,4 +11,12 @@ import com.holy.common.app.Application;
  */
 
 public class App extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // 调用Factory进行初始化
+        Factory.setup();
+        // 推送进行初始化
+        PushManager.getInstance().initialize(this);
+    }
 }

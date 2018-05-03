@@ -81,8 +81,8 @@ public class RegisterFragment extends PresenterFragment<RegisterContract.Present
     }
 
     @Override
-    public void showLoding() {
-        super.showLoding();
+    public void showLoading() {
+        super.showLoading();
         mLoading.start();
         mPhone.setEnabled(false);
         mName.setEnabled(false);

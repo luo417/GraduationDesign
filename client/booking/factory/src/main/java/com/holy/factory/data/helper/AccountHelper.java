@@ -9,6 +9,7 @@ import com.holy.factory.model.api.account.RegisterModel;
 import com.holy.factory.model.db.User;
 import com.holy.factory.net.NetWork;
 import com.holy.factory.net.RemoteService;
+import com.holy.factory.persistence.Account;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,32 +28,41 @@ public class AccountHelper {
         call.enqueue(new Callback<RspModel<AccountRspModel>>() {
             @Override
             public void onResponse(Call<RspModel<AccountRspModel>> call, Response<RspModel<AccountRspModel>> response) {
-                System.out.println("onResponse");
-                if (response == null) {
-                    System.out.println("response is null");
-                }
-
                 RspModel<AccountRspModel> rspModel = response.body();
 
-                if (rspModel == null) {
-                    System.out.println("rspModel is null");
-                }
-
-                if (rspModel.success()) {System.out.println("rspModel.success()");
+                if (rspModel.success()) {
                     //拿到实体
                     AccountRspModel accountRspModel = rspModel.getResult();
 
+                    User user = accountRspModel.getUser();
+
+                    //数据库写入和缓存绑定
+                    // 第一种，之间保存
+                    user.save();
+                        /*
+                        // 第二种通过ModelAdapter
+                        FlowManager.getModelAdapter(User.class)
+                                .save(user);
+
+                        // 第三种，事务中
+                        DatabaseDefinition definition = FlowManager.getDatabase(AppDatabase.class);
+                        definition.beginTransactionAsync(new ITransaction() {
+                            @Override
+                            public void execute(DatabaseWrapper databaseWrapper) {
+                                FlowManager.getModelAdapter(User.class)
+                                        .save(user);
+                            }
+                        }).build().execute();
+                        */
+
+                    Account.login(accountRspModel);
+
                     //判断是否绑定
-                    if (accountRspModel.isBind()) { System.out.println("accountRspModel.isBind()");
-                        User user = accountRspModel.getUser();
-
-                        //TODO 数据库写入和缓存绑定
-
+                    if (accountRspModel.isBind()) {
                         callback.onDataLoaded(user);
-                    } else {  System.out.println("accountRspModel not Bind");
+                    } else {
                         //设备绑定
                         bindPush(callback);
-                        System.out.println("bind finished");
                     }
 
                 } else {
@@ -71,6 +81,7 @@ public class AccountHelper {
     }
 
     public static void bindPush(final DataSource.Callback<User> callback) {
-        callback.onDataNotAvailable(R.string.app_name);
+        Account.setBind(true );
+//        callback.onDataNotAvailable(R.string.app_name);
     }
 }

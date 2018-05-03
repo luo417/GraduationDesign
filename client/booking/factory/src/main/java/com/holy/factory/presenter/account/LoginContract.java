@@ -13,6 +13,6 @@ public interface LoginContract {
     }
 
     interface Presenter extends BaseContract.Presenter{
-        void login(String phone, String name, String passwd);
+        void login(String phone, String passwd);
     }
 }
