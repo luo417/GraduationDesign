@@ -58,7 +58,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
     }
 
     @Override
-    public void onDataLoaded(User user) {
+    public void onDataLoaded(User user) {System.out.println("onDataLoaded");
         final RegisterContract.View view = getView();
         if(view == null) return;
         Run.onUiAsync(new Action() {
@@ -67,6 +67,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
                 view.registerSuccess();
             }
         });
+        System.out.println("onDataLoaded finished");
     }
 
     @Override

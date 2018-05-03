@@ -1,0 +1,17 @@
+{
+  "code" : 1,
+  "message" : "ok",
+  "result" : {
+    "isBind" : false,
+    "account" : "18623240515",
+    "token" : "sdfasl459347sdgjsdlgjldgdf94574dg",
+    "user" : {
+      "id" : "239kkdg-dsfedf458",
+      "phone" : "18623240515",
+      "sex" : 0,
+      "name" : "holy",
+      "portrait" : ""
+    }
+  },
+  "time" : "2018-05-15 12:17:17"
+}
