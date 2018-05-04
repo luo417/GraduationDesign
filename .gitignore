@@ -9,3 +9,8 @@ client/booking/common/src/androidTest/java/com/holy/common/ExampleInstrumentedTe
 client/booking/common/src/test/java/com/holy/common/ExampleUnitTest.java
 
 client/booking/gradle/wrapper/
+
+server/iTalker/.idea/
+server/iTalker/.gradle/
+server/iTalker/build/
+server/iTalker/out/
