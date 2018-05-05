@@ -9,6 +9,7 @@ import com.holy.factory.data.DataSource;
 import com.holy.factory.data.helper.AccountHelper;
 import com.holy.factory.model.api.account.RegisterModel;
 import com.holy.factory.model.db.User;
+import com.holy.factory.persistence.Account;
 import com.holy.factory.presenter.BasePresenter;
 
 import net.qiujuer.genius.kit.handler.Run;
@@ -41,7 +42,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
         } else if (passwd.length() < 6) {
             view.showError(R.string.data_account_register_invalid_parameter_password);
         } else {  //发送网络请求
-            RegisterModel model = new RegisterModel(phone, passwd, name);
+            RegisterModel model = new RegisterModel(phone, passwd, name, Account.getPushId());
             AccountHelper.register(model, this);
         }
     }
@@ -58,7 +59,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
     }
 
     @Override
-    public void onDataLoaded(User user) {System.out.println("onDataLoaded");
+    public void onDataLoaded(User user) {
         final RegisterContract.View view = getView();
         if(view == null) return;
         Run.onUiAsync(new Action() {
@@ -67,7 +68,6 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View>
                 view.registerSuccess();
             }
         });
-        System.out.println("onDataLoaded finished");
     }
 
     @Override

@@ -7,19 +7,19 @@ package com.holy.factory.model.api.account;
  */
 public class RegisterModel {
     private String account;
-    private String passwd;
+    private String password;
     private String name;
-    private String pushID;
+    private String pushId;
 
     public RegisterModel(String account, String passwd, String name) {
         this(account, passwd, name, null);
     }
 
-    public RegisterModel(String account, String passwd, String name, String pushID) {
+    public RegisterModel(String account, String password, String name, String pushID) {
         this.account = account;
-        this.passwd = passwd;
+        this.password = password;
         this.name = name;
-        this.pushID = pushID;
+        this.pushId = pushID;
     }
 
     public String getAccount() {
@@ -30,12 +30,20 @@ public class RegisterModel {
         this.account = account;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
     public String getName() {
@@ -46,21 +54,13 @@ public class RegisterModel {
         this.name = name;
     }
 
-    public String getPushID() {
-        return pushID;
-    }
-
-    public void setPushID(String pushID) {
-        this.pushID = pushID;
-    }
-
     @Override
     public String toString() {
         return "RegisterModel{" +
                 "account='" + account + '\'' +
-                ", passwd='" + passwd + '\'' +
+                ", passwd='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", pushID='" + pushID + '\'' +
+                ", pushID='" + pushId + '\'' +
                 '}';
     }
 }

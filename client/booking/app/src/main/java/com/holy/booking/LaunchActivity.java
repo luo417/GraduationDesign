@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Property;
 import android.view.View;
 
@@ -19,8 +20,8 @@ import com.holy.factory.persistence.Account;
 import net.qiujuer.genius.res.Resource;
 import net.qiujuer.genius.ui.compat.UiCompat;
 
-public class  LaunchActivity extends Activity {
-
+public class LaunchActivity extends Activity {
+    // Drawable
     private ColorDrawable mBgDrawable;
 
     @Override
@@ -31,6 +32,7 @@ public class  LaunchActivity extends Activity {
     @Override
     protected void initWidget() {
         super.initWidget();
+
         // 拿到跟布局
         View root = findViewById(R.id.activity_launch);
         // 获取颜色
@@ -40,6 +42,7 @@ public class  LaunchActivity extends Activity {
         // 设置给背景
         root.setBackground(drawable);
         mBgDrawable = drawable;
+
     }
 
     @Override
@@ -52,7 +55,6 @@ public class  LaunchActivity extends Activity {
             public void run() {
                 // 检查等待状态
                 waitPushReceiverId();
-//                skip();
             }
         });
     }
@@ -61,17 +63,24 @@ public class  LaunchActivity extends Activity {
      * 等待个推框架对我们的PushId设置好值
      */
     private void waitPushReceiverId() {
+        Log.e("waitPushReceiverId", "waitPushReceiverId");
+
         if (Account.isLogin()) {
+            Log.e("waitPushReceiverId", "isLogin");
+
             // 已经登录情况下，判断是否绑定
             // 如果没有绑定则等待广播接收器进行绑定
-            if (Account.isBind()) {
+            if (Account.isBind()) {Log.e("waitPushReceiverId", "isBind");
                 skip();
                 return;
             }
         } else {
+            Log.e("waitPushReceiverId", "not login");
+
             // 没有登录
             // 如果拿到了PushId, 没有登录是不能绑定PushId的
             if (!TextUtils.isEmpty(Account.getPushId())) {
+                Log.e("waitPushReceiverId", "pushId not empty");
                 // 跳转
                 skip();
                 return;
@@ -87,6 +96,7 @@ public class  LaunchActivity extends Activity {
                     }
                 }, 500);
     }
+
 
     /**
      * 在跳转之前需要把剩下的50%进行完成

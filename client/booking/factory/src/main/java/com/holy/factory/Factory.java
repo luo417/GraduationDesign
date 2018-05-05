@@ -33,7 +33,7 @@ public class Factory {
         // 新建一个4个线程的线程池
         executor = Executors.newFixedThreadPool(4);
         gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                 //设置过滤器
                 .setExclusionStrategies(new DBFlowExclusionStrategy())
                 .create();
