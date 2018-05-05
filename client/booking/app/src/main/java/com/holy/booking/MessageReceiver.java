@@ -18,10 +18,13 @@ import com.igexin.sdk.PushConsts;
  * @version 1.0.0
  */
 public class MessageReceiver extends BroadcastReceiver {
-    private static final String TAG = MessageReceiver.class.getSimpleName();
+    private static final String TAG = "MessageReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.e(TAG, "onReceive");
+
+
         if (intent == null)
             return;
 

@@ -12,7 +12,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 
 /**
- * @author qiujuer Email:qiujuer@live.cn
+ * @author hailin
  * @version 1.0.0
  */
 public class Account {
@@ -110,17 +110,20 @@ public class Account {
 //        }
 //        // 未登录返回信息不完全
 //        return false;
-
         return isLogin();
     }
 
+    /**
+     * 是否已经绑定到了服务器
+     *
+     * @return True已绑定
+     */
     public static boolean isBind() {
         return isBind;
     }
 
     /**
      * 设置绑定状态
-     * @param isBind
      */
     public static void setBind(boolean isBind) {
         Account.isBind = isBind;

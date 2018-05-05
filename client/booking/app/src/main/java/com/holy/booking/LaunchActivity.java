@@ -53,6 +53,7 @@ public class LaunchActivity extends Activity {
         startAnim(0.5f, new Runnable() {
             @Override
             public void run() {
+                Log.e("initData", "startAnim");
                 // 检查等待状态
                 waitPushReceiverId();
             }
@@ -63,8 +64,6 @@ public class LaunchActivity extends Activity {
      * 等待个推框架对我们的PushId设置好值
      */
     private void waitPushReceiverId() {
-        Log.e("waitPushReceiverId", "waitPushReceiverId");
-
         if (Account.isLogin()) {
             Log.e("waitPushReceiverId", "isLogin");
 
@@ -75,7 +74,7 @@ public class LaunchActivity extends Activity {
                 return;
             }
         } else {
-            Log.e("waitPushReceiverId", "not login");
+            Log.e("waitPushReceiverId", "not login --->> " + Account.getPushId());
 
             // 没有登录
             // 如果拿到了PushId, 没有登录是不能绑定PushId的
@@ -114,6 +113,8 @@ public class LaunchActivity extends Activity {
      * 真实的跳转
      */
     private void reallySkip() {
+        Log.e("reallySkip", "reallySkip");
+
         // 权限检测，跳转
         if (PermissionsFragment.haveAll(this, getSupportFragmentManager())) {
             // 检查跳转到主页还是登录

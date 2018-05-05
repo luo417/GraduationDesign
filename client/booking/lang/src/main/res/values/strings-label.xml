@@ -21,11 +21,13 @@
     <string name="label_register_welcome">欢迎您!</string>
     <string name="label_register">注册</string>
     <string name="label_password">密码</string>
-    <string name="label_portrait_tips">选择你的专属头像</string>
+    <string name="label_portrait_tips">点击选择你的专属头像</string>
     <string name="label_name">名字</string>
     <string name="label_desc_tips">用一句话介绍自己</string>
     <string name="label_sex_man">男</string>
     <string name="label_sex_woman">女</string>
     <string name="label_go_register">没有账户？去注册</string>
     <string name="label_go_login">已有账户？去登录</string>
+
+    <string name="default_user_name">哈哈哈</string>
 </resources>

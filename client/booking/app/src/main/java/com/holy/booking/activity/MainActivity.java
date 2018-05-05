@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -21,6 +22,10 @@ import com.holy.booking.fragment.main.ResFragment;
 import com.holy.booking.helper.NavHelper;
 import com.holy.common.app.Activity;
 import com.holy.common.widget.PortraitView;
+import com.holy.factory.model.db.User;
+import com.holy.factory.model.db.User_Table;
+import com.holy.factory.persistence.Account;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -79,6 +84,20 @@ public class MainActivity extends Activity
                         this.view.setBackground(resource.getCurrent());
                     }
                 });
+
+        //从本地数据库查询用户头像
+        User user = SQLite.select()
+                .from(User.class)
+                .where(User_Table.id.eq(Account.getUserId()))
+                .querySingle();
+        if (user != null && user.getPortrait() != null) {
+            //显示用户名到界面
+            Glide.with(this)
+                    .load(user.getPortrait())
+                    .asBitmap()
+                    .centerCrop()
+                    .into(mPortrait);
+        }
     }
 
     @Override
@@ -93,12 +112,12 @@ public class MainActivity extends Activity
 
     @OnClick(R.id.im_search)
     void onSearchMenuClick() {
-
+        Toast.makeText(this, "此功能暂未实现，敬请期待！！", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.im_portrait)
     void onPortraitClick() {
-        AccountActivity.show(this);
+        UserActivity.show(this);
     }
 
     @Override
