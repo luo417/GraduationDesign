@@ -6,7 +6,6 @@ import com.holy.common.app.Fragment;
 
 public class MineFragment extends Fragment {
 
-
     @Override
     protected int getContentLayoutID() {
         return R.layout.fragment_mine;
