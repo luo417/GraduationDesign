@@ -23,4 +23,5 @@
     <color name="navIconTintLight">@color/white_alpha_240</color>
 
     <color name="LightBlue">#03a9f4</color>
+    <color name="CardBg">#5506ddf9</color>
 </resources>

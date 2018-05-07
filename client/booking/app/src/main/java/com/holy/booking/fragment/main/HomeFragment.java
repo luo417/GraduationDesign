@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
 
 
         //添加Header
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.listitem_movie_header, recyclerView, false);
+        View header = LayoutInflater.from(getContext()).inflate(R.layout.listitem_mine_course_header, recyclerView, false);
         Banner banner = (Banner) header;
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(BANNER_ITEMS);
@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     public class QuickAdapter extends BaseQuickAdapter<Movie, BaseViewHolder> {
         public QuickAdapter() {
-            super(R.layout.listitem_movie_item);
+            super(R.layout.listitem_course_item);
         }
 
         @Override
