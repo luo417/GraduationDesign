@@ -1,46 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_common">
-
-    <ImageView
-        android:id="@+id/lmi_avatar"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="@dimen/padding_common"
-        android:layout_marginRight="@dimen/padding_common"
-        android:contentDescription="@string/app_name"
-        tools:background="#fff0f0f0"/>
+    android:orientation="vertical"
+    android:background="@color/cardBg"
+    android:padding="@dimen/len_10"
+    android:layout_marginLeft="@dimen/len_10"
+    android:layout_marginRight="@dimen/len_10"
+    android:layout_marginTop="@dimen/len_10">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView style="@style/AppTheme.Label.Title"
-            android:id="@+id/lmi_title"
-            android:minWidth="200dp"
-            android:layout_marginTop="@dimen/padding_common_d"
-            tools:background="#fff0f0f0"/>
-        <TextView style="@style/AppTheme.Label"
-            android:id="@+id/lmi_grade"
-            android:minWidth="50dp"
-            android:layout_marginTop="@dimen/padding_common_d"
-            android:textColor="@android:color/holo_orange_dark"
-            tools:background="#fff0f0f0"/>
-        <TextView style="@style/AppTheme.Label"
-            android:id="@+id/lmi_describe"
-            android:minWidth="100dp"
-            android:layout_marginTop="@dimen/padding_common_d"
-            tools:background="#fff0f0f0"/>
-        <TextView style="@style/AppTheme.Label"
-            android:id="@+id/lmi_actor"
-            android:minWidth="100dp"
-            android:layout_marginTop="@dimen/padding_common_d"
-            tools:background="#fff0f0f0"/>
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/lmi_avatar"
+                android:layout_width="63dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/java_icon"/>
+            <TextView
+                android:id="@+id/course_detail"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="世界第一编程语言我们的第一学科"
+                android:textColor="@color/iconText"
+                android:gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/len_6"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textSize="@dimen/font_22"
+                android:textColor="@color/iconText"
+                android:id="@+id/mci_title"
+                android:minWidth="200dp"
+                tools:background="#fff0f0f0"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/AppTheme.Label"
+                    android:id="@+id/mci_grade"
+                    android:text="高级"
+                    android:layout_marginTop="@dimen/padding_common_d"
+                    android:textColor="@android:color/holo_orange_dark"
+                    tools:background="#fff0f0f0"/>
+                <TextView
+                    style="@style/AppTheme.Label"
+                    android:text="  ·  "
+                    android:layout_marginTop="@dimen/padding_common_d"
+                    android:textColor="@android:color/holo_orange_dark"
+                    tools:background="#fff0f0f0"/>
+                <TextView
+                    style="@style/AppTheme.Label"
+                    android:id="@+id/mci_price"
+                    android:text="￥12980"
+                    android:minWidth="50dp"
+                    android:layout_marginTop="@dimen/padding_common_d"
+                    android:textColor="@android:color/holo_orange_dark"
+                    tools:background="#fff0f0f0"/>
+            </LinearLayout>
+            <TextView style="@style/AppTheme.Label"
+                android:id="@+id/mci_seat"
+                android:minWidth="100dp"
+                android:layout_marginTop="@dimen/padding_common_d"
+                android:text="座位：109号教室 5排7列"
+                tools:background="#fff0f0f0"/>
+            <TextView style="@style/AppTheme.Label"
+                android:id="@+id/mci_time"
+                android:minWidth="100dp"
+                android:layout_marginTop="@dimen/padding_common_d"
+                android:text="预约时间：2018-05-05 15:06:50"
+                tools:background="#fff0f0f0"/>
+        </LinearLayout>
+
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/course_tag"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_36"
+        android:layout_marginTop="@dimen/len_6"
+        android:src="@drawable/technologyadjava"/>
 
 </LinearLayout>
 

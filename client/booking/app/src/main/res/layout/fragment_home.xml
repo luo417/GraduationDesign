@@ -9,7 +9,7 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/contentBg"
         app:srlPrimaryColor="@color/colorPrimary"
         app:srlAccentColor="@android:color/white"
         app:srlEnableHeaderTranslationContent="false"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:background="@android:color/white"
+            android:background="@color/contentBg"
             android:overScrollMode="never"
             tools:listitem="@layout/listitem_mine_course_item"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

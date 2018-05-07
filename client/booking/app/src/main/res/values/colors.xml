@@ -7,4 +7,8 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorBackgroundDark">#f2f2f2</color>
     <color name="colorDivision">#33aaaaaa</color>
+
+    <color name="iconText">#2e64b9</color>
+    <color name="contentBg">#dcdbdb</color>
+    <color name="cardBg">#ffffff</color>
 </resources>

@@ -87,6 +87,15 @@ public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Pre
             //显示用户名到界面
             mName.setText(user.getName());
         }
+
+        if (user != null && user.getPortrait() != null) {
+            //显示用户名到界面
+            Glide.with(this)
+                    .load(user.getPortrait())
+                    .asBitmap()
+                    .centerCrop()
+                    .into(mPortrait);
+        }
     }
 
     @OnClick(R.id.im_portrait)

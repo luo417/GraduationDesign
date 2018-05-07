@@ -2,6 +2,7 @@ package com.holy.booking.fragment.main;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -74,12 +76,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         //添加Header
         View header = LayoutInflater.from(getContext()).inflate(R.layout.listitem_mine_course_header, recyclerView, false);
         Banner banner = (Banner) header;
         banner.setImageLoader(new GlideImageLoader());
         banner.setImages(BANNER_ITEMS);
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
         banner.start();
         mAdapter.addHeaderView(banner);
         mAdapter.openLoadAnimation();
@@ -92,11 +99,15 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void convert(BaseViewHolder viewHolder, Movie item) {
-            viewHolder.setText(R.id.lmi_title, item.filmName)
-                    .setText(R.id.lmi_actor, item.actors)
-                    .setText(R.id.lmi_grade, item.grade)
-                    .setText(R.id.lmi_describe, item.shortinfo);
+            viewHolder.setText(R.id.mci_title, item.filmName)
+                    .setTextColor(R.id.mci_title, Color.parseColor(item.color))
+                    .setText(R.id.mci_time, item.actors)
+                    .setText(R.id.mci_grade, item.grade)
+                    .setText(R.id.mci_seat, "校区："+item.shortinfo)
+                    .setText(R.id.course_detail, item.course_detail)
+                    .setTextColor(R.id.course_detail , Color.parseColor(item.color));
             Glide.with(mContext).load(item.picaddr).into((ImageView) viewHolder.getView(R.id.lmi_avatar));
+            Glide.with(mContext).load(item.coursetag).into((ImageView) viewHolder.getView(R.id.course_tag));
         }
     }
 
@@ -108,12 +119,15 @@ public class HomeFragment extends Fragment {
     }
 
     public static class Movie {
+        public String color;
         public String actors;
         public String filmName;
         public String grade;
         public String info;
         public String picaddr;
         public String shortinfo;
+        public String coursetag;
+        public String course_detail;
     }
 
     public static class BannerItem {
@@ -131,33 +145,28 @@ public class HomeFragment extends Fragment {
     }
 
     public static List<BannerItem> BANNER_ITEMS = new ArrayList<BannerItem>(){{
-        add(new BannerItem("最后的骑士", R.drawable.image_movie_header_48621499931969370));
-        add(new BannerItem("三生三世十里桃花", R.drawable.image_movie_header_12981501221820220));
-        add(new BannerItem("豆福传", R.drawable.image_movie_header_12231501221682438));
+        add(new BannerItem("PHP重磅升级", R.drawable.banner_php));
+        add(new BannerItem("人工智能+Python", R.drawable.banner_python));
+        add(new BannerItem("高薪得Linux运维工程师", R.drawable.banner_linux));
     }};
 
 
     public static String JSON_MOVIES = "[" +
-            "{\"actors\":\"丹尼斯·威缇可宁|Emma|Nikki|Jiayao|Wang|Maggie|Mao|Gang-yun|Sa\",\"filmName\":\"神灵寨\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg\",\"releasedate\":\"2017-07-31\",\"shortinfo\":\"父亲忽病危 新娘真够黑\",\"type\":\"剧情|喜剧\"}," +
-            "{\"actors\":\"刘亦菲|杨洋|彭子苏|严屹宽|罗晋\",\"filmName\":\"三生三世十里桃花\",\"grade\":\"9.2\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3566.jpg\",\"releasedate\":\"2017-08-03\",\"shortinfo\":\"虐心姐弟恋 颜值要逆天\",\"type\":\"剧情|爱情|奇幻\"}," +
-            "{\"actors\":\"尹航|代旭|李晨浩|衣云鹤|张念骅\",\"filmName\":\"谁是球王\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3750.jpg\",\"releasedate\":\"2017-08-03\",\"shortinfo\":\"足球变人生 再战可辉煌\",\"type\":\"剧情|喜剧\"}," +
-            "{\"actors\":null,\"filmName\":\"大象林旺之一夜成名\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3757.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"大象参二战 一生好伙伴\",\"type\":\"动作|动画|战争|冒险\"}," +
-            "{\"actors\":\"薛凯琪|陈意涵|张钧甯|迈克·泰森\",\"filmName\":\"闺蜜2：无二不作\",\"grade\":\"8.3\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3776.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"闺蜜团出战 会一会新娘\",\"type\":\"喜剧|爱情\"}," +
-            "{\"actors\":\"彭禺厶|王萌|周凯文|曹琦|孟子叶\",\"filmName\":\"诡井\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3824.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"午夜深井中 怨魂欲现形\",\"type\":\"恐怖|惊悚\"}," +
-            "{\"actors\":\"旺卓措|刘承宙|高欣生|段楠|来钰\",\"filmName\":\"荒野加油站\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3821.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"夜半拉乘客 结果遇不测\",\"type\":\"惊悚|悬疑\"}," +
-            "{\"actors\":\"刘佩琦|曹云金|罗昱焜\",\"filmName\":\"龙之战\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3778.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"持倭刀屹立 抗外敌救国\",\"type\":\"动作|战争|历史\"}," +
-            "{\"actors\":\"金巴|曲尼次仁|夏诺.扎西敦珠|索朗尼玛|益西旦增\",\"filmName\":\"皮绳上的魂\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3801.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"走完朝圣路 又上降魔旅\",\"type\":\"剧情\"}," +
-            "{\"actors\":\"严丽祯|李晔|王衡|李传缨|李心仪\",\"filmName\":\"玩偶奇兵\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3779.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"玩偶战数码 一头两个大\",\"type\":\"动画|冒险|奇幻\"}," +
-            "{\"actors\":\"斯蒂芬·马布里|吴尊|何冰|郑秀妍|王庆祥\",\"filmName\":\"我是马布里\",\"grade\":\"0.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3810.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"吴尊助冠军 热血灌篮魂\",\"type\":\"剧情|运动\"}," +
-            "{\"actors\":\"周鹏雨|穆建荣|陈泽帆|鹿露|宋星成\",\"filmName\":\"原罪的羔羊\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3802.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"古镇来戏班 往事不一般\",\"type\":\"悬疑\"}," +
-            "{\"actors\":\"王大陆|张天爱|任达华|盛冠森|王迅\",\"filmName\":\"鲛珠传\",\"grade\":\"7.1\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3777.jpg\",\"releasedate\":\"2017-08-04\",\"shortinfo\":\"改编热IP 杠杠号召力\",\"type\":\"喜剧|动作|奇幻\"}," +
-            "{\"actors\":\"成龙|罗伯特·雷德福\",\"filmName\":\"地球：神奇的一天\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3803.jpg\",\"releasedate\":\"2017-08-11\",\"shortinfo\":\"史诗纪录片 十年再相见\",\"type\":\"纪录片\"}," +
-            "{\"actors\":\"刘德华|舒淇|杨祐宁|张静初|让·雷诺|曾志伟|沙溢\",\"filmName\":\"侠盗联盟\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3592.jpg\",\"releasedate\":\"2017-08-11\",\"shortinfo\":\"侠盗三剑客 越洋逃恐吓\",\"type\":\"动作|冒险\"}," +
-            "{\"actors\":\"廖凡|李易峰|万茜|李纯|张国柱\",\"filmName\":\"心理罪\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3795.jpg\",\"releasedate\":\"2017-08-11\",\"shortinfo\":\"侦探两搭档 真相背后藏\",\"type\":\"悬疑|犯罪\"}," +
-            "{\"actors\":\"徐瑞阳|赵倩|姜启杨|徐万学|韩靓|韦安\",\"filmName\":\"隐隐惊马槽之绝战女僵尸\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3825.jpg\",\"releasedate\":\"2017-08-11\",\"shortinfo\":\"阴兵来借道 尸占惊马槽\",\"type\":\"惊悚|动作|冒险|悬疑\"}," +
-            "{\"actors\":\"宋睿|王良|张佳浩|叶常清\",\"filmName\":\"左眼阴阳\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3804.jpg\",\"releasedate\":\"2017-08-11\",\"shortinfo\":\"左眼见到鬼 是诡还是魅\",\"type\":\"恐怖|惊悚|悬疑\"}," +
-            "{\"actors\":null,\"filmName\":\"二十二\",\"grade\":\"10.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3811.jpg\",\"releasedate\":\"2017-08-14\",\"shortinfo\":\"二战女俘虏 讲述心中苦\",\"type\":\"纪录片\"}," +
-            "{\"actors\":\"郭富城|王千源|刘涛|余皑磊|冯嘉怡\",\"filmName\":\"破·局\",\"grade\":\"5.0\",\"picaddr\":\"http://app.infunpw.com/commons/images/cinema/cinema_films/3812.jpg\",\"releasedate\":\"2017-08-18\",\"shortinfo\":\"影帝硬碰硬 迷局谁怕谁\",\"type\":\"动作|犯罪\"}" +
+            "{\"color\":\"#3e7cc3\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"JavaEE\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/java_icon.jpg\",\"course_detail\":\"世界第一编程语言我们的第一学科\",\"shortinfo\":\"北京昌平校区\",\"type\":\"剧情|喜剧\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_java.jpg\"}," +
+            "{\"color\":\"#77588d\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"人工智能+Python\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/python_icon.jpg\",\"course_detail\":\"人工智能+Python人工智能主流语言\",\"shortinfo\":\"北京昌平校区\",\"type\":\"剧情|爱情|奇幻\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_python.jpg\"}," +
+            "{\"color\":\"#b15159\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"前端与移动开发\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/web_icon.jpg\",\"course_detail\":\"大前端改变世界我们改变前端\",\"shortinfo\":\"北京昌平校区\",\"type\":\"剧情|喜剧\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_web.jpg\"}," +
+            "{\"color\":\"#e03b5b\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"UI/UE设计\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/ui_icon.jpg\",\"course_detail\":\"打造会代码的全能设计师\",\"shortinfo\":\"重庆南岸校区\",\"type\":\"动作|动画|战争|冒险\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_ui.jpg\"}," +
+            "{\"color\":\"#6e88ce\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"PHP\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/php_icon.jpg\",\"course_detail\":\"打造横跨前端+后端+移动端的全能型人才！\",\"shortinfo\":\"北京昌平校区\",\"type\":\"喜剧|爱情\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_php.jpg\"}," +
+            "{\"color\":\"#ebb84d\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"C/C++与网络攻防\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/c_icon.jpg\",\"course_detail\":\"C生万物 编程之本 长远IT职业发展的选择\",\"shortinfo\":\"深圳校区\",\"type\":\"恐怖|惊悚\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_c.jpg\"}," +
+            "{\"color\":\"#4ba396\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"云计算大数据\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/cloud_icon.jpg\",\"course_detail\":\"站在云端操控万千数据\",\"shortinfo\":\"北京昌平校区\",\"type\":\"惊悚|悬疑\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_cloud.jpg\"}," +
+            "{\"color\":\"#91784d\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"H5+全栈工程师\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/stack_icon.jpg\",\"course_detail\":\"打造精通前端+后端+移动端的精英型全栈工程师\",\"shortinfo\":\"北京昌平校区\",\"type\":\"动作|战争|历史\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_stack.jpg\"}," +
+            "{\"color\":\"#499bc5\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"新媒体运营\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/xmt_icon.jpg\",\"course_detail\":\"打造会策划、懂产品运营的高端复合型人才\",\"shortinfo\":\"北京昌平校区\",\"type\":\"剧情\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_xmt.jpg\"}," +
+            "{\"color\":\"#d3442a\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"电商运营\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/ds_icon.jpg\",\"course_detail\":\"学电商运营工作创业两不误\",\"shortinfo\":\"北京昌平校区\",\"type\":\"动画|冒险|奇幻\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_ds.jpg\"}," +
+            "{\"color\":\"#30babd\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"视觉设计\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/jpui_icon.jpg\",\"course_detail\":\"专业设计 纯干货快速就业机会多\",\"shortinfo\":\"北京昌平校区\",\"type\":\"剧情|运动\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_uijp.jpg\"}," +
+            "{\"color\":\"#db7b23\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"产品经理\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/pm_icon.jpg\",\"course_detail\":\"产品之父，互联网产品规划师\",\"shortinfo\":\"重庆南岸校区\",\"type\":\"悬疑\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_pm.jpg\"}," +
+            "{\"color\":\"#3a8dd8\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"软件测试\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/test_icon.jpg\",\"course_detail\":\"软件质量的捍卫者\",\"shortinfo\":\"重庆南岸校区\",\"type\":\"上海浦东校区\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_test.jpg\"}," +
+            "{\"color\":\"#448bba\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"网络安全+运维工程师\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/linux_icon.jpg\",\"course_detail\":\"打造自动化、智能化大数据时代的IT金领\",\"shortinfo\":\"史诗纪录片 十年再相见\",\"type\":\"纪录片\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_linux.jpg\"}," +
+            "{\"color\":\"#6d3e94\",\"actors\":\"开班时间：2018-07-01\",\"filmName\":\"智能物联网+区块链\",\"grade\":\"就业班\",\"picaddr\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/qukuailian.jpg\",\"course_detail\":\"培养厚基础、宽口径、强能力的综合性人才\",\"shortinfo\":\"重庆南岸校区\",\"type\":\"动作|冒险\",\"coursetag\":\"https://itacker.oss-cn-beijing.aliyuncs.com/course_icon/technologyad_wlw.jpg\"}" +
             "]";
 
 }
